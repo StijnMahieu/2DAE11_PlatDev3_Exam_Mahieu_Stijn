@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - RockBoxTrigger1
+  - RockBoxTrigger0
+  - CardboardTrigger
+  - FinishTrigger
   layers:
   - Default
   - TransparentFX

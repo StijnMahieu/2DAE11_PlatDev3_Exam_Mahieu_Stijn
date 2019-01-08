@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class characterControlScript : MonoBehaviour
+public class CharacterControlScript : MonoBehaviour
 {
     //animations
     private Animator _animator;
@@ -19,18 +19,22 @@ public class characterControlScript : MonoBehaviour
 
     //jump
     private bool _jump;
+    private bool _isJumping;
     [SerializeField]
-    private float _jumpHeight = 1;
+    private float _jumpHeight;
 
     //LocomotionParameters
     [SerializeField]
     private float _mass = 75;
     [SerializeField]
-    private float _acceleration = 3;
+    private float _acceleration;
     [SerializeField]
     private float _dragOnGround;
     [SerializeField]
-    private float _maxRunningSpeed = (30.0f * 1000) / (60 * 60);
+    private float _maxRunningSpeed;
+
+    //Cameramultiplier
+    private float _cameraMultiplier = 2;
 
     //Dependencies
     [SerializeField]
@@ -52,10 +56,18 @@ public class characterControlScript : MonoBehaviour
     {
         _movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-        if(Input.GetButtonDown("Jump"))
+        if(Input.GetButtonDown("Jump") && !_jump)
         {
             _jump = true;
         }
+
+        while (!_characterController.isGrounded)
+        {
+            _isJumping = true;
+        }
+
+        transform.Rotate(0,_cameraMultiplier * Input.GetAxis("HorizontalCam"), 0);
+        //transform.Rotate(Input.GetAxis("VerticalCam"), 0, 0);
     }
 
     void FixedUpdate()
@@ -78,6 +90,7 @@ public class characterControlScript : MonoBehaviour
         {
             _velocity += -Physics.gravity.normalized * Mathf.Sqrt(2 * Physics.gravity.magnitude * _jumpHeight);
             _jump = false;
+            _animator.SetTrigger("Jump");
         }
     }
 
