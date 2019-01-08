@@ -19,7 +19,6 @@ public class CharacterControlScript : MonoBehaviour
 
     //jump
     private bool _jump;
-    private bool _isJumping;
     [SerializeField]
     private float _jumpHeight;
 
@@ -43,6 +42,7 @@ public class CharacterControlScript : MonoBehaviour
     //animation
     private int _horizontalVelocityParameter = Animator.StringToHash("HorizontalVelocity");
     private int _verticalVelocityParameter = Animator.StringToHash("VerticalVelocity");
+    private bool _isJumping;
 
     // Use this for initialization
     void Start()
@@ -56,14 +56,9 @@ public class CharacterControlScript : MonoBehaviour
     {
         _movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-        if(Input.GetButtonDown("Jump") && !_jump)
+        if(Input.GetButtonDown("Jump") && !_isJumping)
         {
             _jump = true;
-        }
-
-        while (!_characterController.isGrounded)
-        {
-            _isJumping = true;
         }
 
         transform.Rotate(0,_cameraMultiplier * Input.GetAxis("HorizontalCam"), 0);
@@ -91,7 +86,13 @@ public class CharacterControlScript : MonoBehaviour
             _velocity += -Physics.gravity.normalized * Mathf.Sqrt(2 * Physics.gravity.magnitude * _jumpHeight);
             _jump = false;
             _animator.SetTrigger("Jump");
+            _isJumping = true;
         }
+        else if (_characterController.isGrounded)
+        {
+            _isJumping = false;
+        }
+
     }
 
     private void LimitMaximumRunningSpeed()
