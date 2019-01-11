@@ -8,6 +8,7 @@ TagManager:
   - RockBoxTrigger0
   - CardboardTrigger
   - FinishTrigger
+  - DeadZoneTrigger
   layers:
   - Default
   - TransparentFX

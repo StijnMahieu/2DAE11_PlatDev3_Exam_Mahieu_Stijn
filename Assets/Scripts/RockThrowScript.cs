@@ -46,6 +46,7 @@ public class RockThrowScript : MonoBehaviour {
             {
                 Debug.Log("Rock picked up");
                 _isRockPickedUp = true;
+                this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.holdingRock;
             }
         }
         if (_collision.gameObject.tag == "RockBoxTrigger" + 1)
