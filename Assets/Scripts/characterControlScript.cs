@@ -94,7 +94,7 @@ public class CharacterControlScript : MonoBehaviour
         switch (State)
         {
             case States.normalMode:
-                
+                _cameraMultiplier = 2;
                 break;
 
             case States.holdingRock:

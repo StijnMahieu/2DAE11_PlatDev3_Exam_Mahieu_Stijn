@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class CardboardTriggerScript : MonoBehaviour
 {
-    private bool _isPushing;
-
     // Use this for initialization
     void Start()
     {
-        _isPushing = false;
+
     }
 
     // Update is called once per frame
@@ -21,15 +19,15 @@ public class CardboardTriggerScript : MonoBehaviour
     {
         if (_collision.gameObject.tag == "CardboardTrigger")
         {
-            if (Input.GetButtonDown("PushingBox") && !_isPushing)
+            if (Input.GetButtonDown("PushingBox") && this.gameObject.GetComponent<CharacterControlScript>().State == CharacterControlScript.States.normalMode)
             {
-                _isPushing = true;
                 this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.pushingBox;
+                _collision.gameObject.transform.parent.parent = this.gameObject.transform;
             }
-            if (Input.GetButtonDown("PushingBox") && _isPushing)
+            else if (Input.GetButtonDown("PushingBox") && this.gameObject.GetComponent<CharacterControlScript>().State == CharacterControlScript.States.pushingBox)
             {
-                _isPushing = false;
                 this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.normalMode;
+                _collision.gameObject.transform.parent.parent = null;
             }
         }
     }
