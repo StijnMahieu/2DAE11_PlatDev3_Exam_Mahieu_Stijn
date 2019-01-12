@@ -106,6 +106,7 @@ public class CharacterControlScript : MonoBehaviour
                 _cameraMultiplier = 0;
                 _camPivot.transform.localEulerAngles = Vector3.Scale(_camPivot.transform.localEulerAngles, new Vector3(0, 1, 1));
                 _movement = new Vector3(0, 0, Input.GetAxis("Vertical"));
+
                 break;
 
             case States.crouched:
