@@ -61,6 +61,9 @@ public class CharacterControlScript : MonoBehaviour
     [SerializeField]
     private Transform _absoluteForward;
 
+    //boxSpeed
+    private float _boxSpeed = 0.5f;
+
     //animation
     private int _horizontalVelocityParameter = Animator.StringToHash("HorizontalVelocity");
     private int _verticalVelocityParameter = Animator.StringToHash("VerticalVelocity");
@@ -81,7 +84,7 @@ public class CharacterControlScript : MonoBehaviour
 
         _movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-        if(Input.GetButtonDown("Jump") && !_isJumping && State == States.normalMode)
+        if (Input.GetButtonDown("Jump") && !_isJumping && State == States.normalMode)
         {
             _jump = true;
         }
@@ -105,12 +108,21 @@ public class CharacterControlScript : MonoBehaviour
                 _jump = false;
                 _cameraMultiplier = 0;
                 _camPivot.transform.localEulerAngles = Vector3.Scale(_camPivot.transform.localEulerAngles, new Vector3(0, 1, 1));
-                _movement = new Vector3(0, 0, Input.GetAxis("Vertical"));
+
+                if (_movement.z >= 0.5f)
+                {
+                    _movement = new Vector3(0, 0, Input.GetAxis("Vertical")) * _boxSpeed;
+                }
+                else
+                {
+                    _movement = Vector3.zero;
+                }
 
                 break;
 
             case States.crouched:
                 _jump = false;
+                print("crouched");
                 break;
 
             case States.dead:
@@ -127,6 +139,7 @@ public class CharacterControlScript : MonoBehaviour
         ApplyGroundDrag();
         LimitMaximumRunningSpeed();
         ApplyJump();
+        Crouch();
 
         _characterController.Move(_velocity * Time.deltaTime);
 
@@ -162,7 +175,7 @@ public class CharacterControlScript : MonoBehaviour
 
     private void ApplyGroundDrag()
     {
-        if(_characterController.isGrounded)
+        if (_characterController.isGrounded)
         {
             _velocity = _velocity * (1 - Time.deltaTime * _dragOnGround);
         }
@@ -170,7 +183,7 @@ public class CharacterControlScript : MonoBehaviour
 
     private void ApplyMovement()
     {
-        if(_characterController.isGrounded)
+        if (_characterController.isGrounded)
         {
             Vector3 xzAbsoluteForward = Vector3.Scale(_absoluteForward.forward, new Vector3(1, 0, 1));
 
@@ -183,7 +196,7 @@ public class CharacterControlScript : MonoBehaviour
 
     private void ApplyGround()
     {
-        if(_characterController.isGrounded)
+        if (_characterController.isGrounded)
         {
             _velocity -= Vector3.Project(_velocity, Physics.gravity.normalized);
         }
@@ -191,7 +204,7 @@ public class CharacterControlScript : MonoBehaviour
 
     private void ApplyGravity()
     {
-        if(!_characterController.isGrounded)
+        if (!_characterController.isGrounded)
         {
             _velocity += Physics.gravity * Time.deltaTime;
         }
@@ -207,7 +220,7 @@ public class CharacterControlScript : MonoBehaviour
     public void RotateCamera()
     {
         Vector3 tempRot = transform.localEulerAngles;
-        tempRot.y += Input.GetAxis("HorizontalCam") *_cameraMultiplier;
+        tempRot.y += Input.GetAxis("HorizontalCam") * _cameraMultiplier;
         transform.localEulerAngles = tempRot;
 
         Vector3 rotationCamPivot = _camPivot.transform.localEulerAngles;
@@ -262,6 +275,20 @@ public class CharacterControlScript : MonoBehaviour
         if (!result)
             angle = max;
         return angle;
+    }
+
+    public void Crouch()
+    {
+        if (Input.GetButtonDown("Crouch") && this.gameObject.GetComponent<CharacterControlScript>().State == CharacterControlScript.States.normalMode)
+        {
+            this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.crouched;
+            _animator.SetBool("Crouched", true);
+        }
+        else if (Input.GetButtonDown("PushingBox") && this.gameObject.GetComponent<CharacterControlScript>().State == CharacterControlScript.States.crouched)
+        {
+            this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.normalMode;
+            _animator.SetBool("Crouched", true);
+        }
     }
 
     private void OnTriggerEnter(Collider _collision)
