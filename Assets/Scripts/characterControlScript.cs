@@ -122,13 +122,14 @@ public class CharacterControlScript : MonoBehaviour
 
             case States.crouched:
                 _jump = false;
-                print("crouched");
+                _movement = Vector3.zero;
                 break;
 
             case States.dead:
                 SceneManager.LoadScene(0);
                 break;
         }
+        print(_animator.GetBool("Crouched"));
     }
 
     void FixedUpdate()
@@ -284,10 +285,10 @@ public class CharacterControlScript : MonoBehaviour
             this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.crouched;
             _animator.SetBool("Crouched", true);
         }
-        else if (Input.GetButtonDown("PushingBox") && this.gameObject.GetComponent<CharacterControlScript>().State == CharacterControlScript.States.crouched)
+        else if (Input.GetButtonDown("Crouch") && this.gameObject.GetComponent<CharacterControlScript>().State == CharacterControlScript.States.crouched)
         {
             this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.normalMode;
-            _animator.SetBool("Crouched", true);
+            _animator.SetBool("Crouched", false);
         }
     }
 
