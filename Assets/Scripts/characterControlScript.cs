@@ -133,7 +133,6 @@ public class CharacterControlScript : MonoBehaviour
                 SceneManager.LoadScene(0);
                 break;
         }
-        print(_animator.GetBool("Crouched"));
     }
 
     void FixedUpdate()
@@ -145,6 +144,7 @@ public class CharacterControlScript : MonoBehaviour
         LimitMaximumRunningSpeed();
         ApplyJump();
         Crouch();
+        Falling();
 
         //cameramovement during pushing box
         if (_lerpForward)
@@ -310,6 +310,15 @@ public class CharacterControlScript : MonoBehaviour
         if (_collision.gameObject.tag == "DeadZoneTrigger")
         {
             State = States.dead;
+            _animator.SetBool("Falling", false);
+        }
+    }
+
+    private void Falling()
+    {
+        if(_characterController.transform.position.y <= 0 )
+        {
+            _animator.SetBool("Falling", true);
         }
     }
 
