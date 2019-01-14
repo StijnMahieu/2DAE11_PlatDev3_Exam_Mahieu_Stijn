@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: da1082f1480ea6346bcaca7d7d9d009e
+guid: 88eadcea492d4f8499194d381f5fb2b1
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -139,7 +139,7 @@ ModelImporter:
     400130: mixamorig:Spine1
     400132: mixamorig:Spine2
     400134: //RootNode
-    7400000: Crouching Idle
+    7400000: Crouched Sneaking Left
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -170,10 +170,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Crouching Idle
+      name: Crouched Sneaking Left
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 75
+      lastFrame: 38
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

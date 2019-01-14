@@ -64,6 +64,9 @@ public class CharacterControlScript : MonoBehaviour
     //boxSpeed
     private float _boxSpeed = 0.5f;
 
+    //crouchSpeed
+    private float _crouchSpeed = 0.25f;
+
     //animation
     private int _horizontalVelocityParameter = Animator.StringToHash("HorizontalVelocity");
     private int _verticalVelocityParameter = Animator.StringToHash("VerticalVelocity");
@@ -122,7 +125,7 @@ public class CharacterControlScript : MonoBehaviour
 
             case States.crouched:
                 _jump = false;
-                _movement = Vector3.zero;
+                _movement = _movement * _crouchSpeed;
                 break;
 
             case States.dead:
