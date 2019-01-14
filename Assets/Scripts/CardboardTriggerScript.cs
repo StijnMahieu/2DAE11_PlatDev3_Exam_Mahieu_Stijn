@@ -25,7 +25,9 @@ public class CardboardTriggerScript : MonoBehaviour
     private void FixedUpdate()
     {
         if (_isPushing)
+        {
             PushingBox();
+        }
     }
     private void OnTriggerStay(Collider _collision)
     {

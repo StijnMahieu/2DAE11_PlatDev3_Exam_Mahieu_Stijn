@@ -67,6 +67,10 @@ public class CharacterControlScript : MonoBehaviour
     private bool _lerpForward = false;
     private float _lerpCounter;
 
+    //throwing
+    public bool AllowMovement { get; set; }
+    public bool AllowCameraRotation { get; set; }
+
     //crouchSpeed
     private float _crouchSpeed = 0.25f;
 
@@ -80,6 +84,8 @@ public class CharacterControlScript : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _characterController = GetComponent<CharacterController>();
+        AllowMovement = true;
+        AllowCameraRotation = true;
     }
 
     // Update is called once per frame
@@ -98,7 +104,10 @@ public class CharacterControlScript : MonoBehaviour
         //right trigger rotation
         if (State != States.pushingBox)
         {
-            RotateCamera();
+            if (AllowCameraRotation)
+            {
+                RotateCamera();
+            }
         }
         switch (State)
         {
@@ -112,17 +121,6 @@ public class CharacterControlScript : MonoBehaviour
 
             case States.pushingBox:
                 _jump = false;
-                //_cameraMultiplier = 0;
-
-                //if (_movement.z >= 0.5f)
-                //{
-                //    _movement = new Vector3(0, 0, Input.GetAxis("Vertical")) * _boxSpeed;
-                //}
-                //else
-                //{
-                //    _movement = Vector3.zero;
-                //}
-
                 break;
 
             case States.crouched:
@@ -146,12 +144,17 @@ public class CharacterControlScript : MonoBehaviour
         LimitMaximumRunningSpeed();
         ApplyJump();
         Crouch();
+
+        //cameramovement during pushing box
         if (_lerpForward)
         {
             LerpForward(_targetTransform);
         }
 
-        _characterController.Move(_velocity * Time.deltaTime);
+        if (AllowMovement)
+        {
+            _characterController.Move(_velocity * Time.deltaTime);
+        }
 
         //animations
         MovementAnimations();
@@ -321,7 +324,6 @@ public class CharacterControlScript : MonoBehaviour
 
     private void LerpForward(Vector3 target)
     {
-        Debug.Log("help");
         _lerpCounter += Time.deltaTime;
         this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward, target, _lerpCounter);
 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 235f20ae7d9e14143b8f39bfacfa180c
+guid: ea72d75f0cc6cf54fb617a9e64e265f0
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -139,7 +139,7 @@ ModelImporter:
     400130: mixamorig:Spine1
     400132: mixamorig:Spine2
     400134: //RootNode
-    7400000: Throw Object
+    7400000: Throw Pose
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -170,10 +170,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Throw Object
+      name: Throw Pose
       takeName: mixamo.com
-      firstFrame: 14
-      lastFrame: 98
+      firstFrame: 0
+      lastFrame: 14
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

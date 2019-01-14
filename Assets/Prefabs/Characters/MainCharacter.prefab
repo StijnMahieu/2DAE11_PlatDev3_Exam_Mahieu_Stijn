@@ -549,7 +549,6 @@ GameObject:
   - component: {fileID: 143130337735154540}
   - component: {fileID: 114920215566751116}
   - component: {fileID: 95105017849139644}
-  - component: {fileID: 114685753901151932}
   - component: {fileID: 114320036060687584}
   - component: {fileID: 114923105794771466}
   m_Layer: 0
@@ -2401,20 +2400,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2814c911fdc3b9f48aae96cc3d9ed61c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114685753901151932
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1565283284220274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18dd8623e6cd86b4da16ef8d4f8dbf84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rockPointers:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &114920215566751116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2426,6 +2411,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adfb03083092e4f42a3eabca52243d55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerCamera: {fileID: 1154642835877118}
+  _hitPoints: 3
+  State: 0
   _camPivot: {fileID: 1366873689688528}
   _jumpHeight: 2.5
   _mass: 75
