@@ -61,8 +61,11 @@ public class CharacterControlScript : MonoBehaviour
     [SerializeField]
     private Transform _absoluteForward;
 
-    //boxSpeed
+    //box
     private float _boxSpeed = 0.5f;
+    private Vector3 _targetTransform;
+    private bool _lerpForward = false;
+    private float _lerpCounter;
 
     //crouchSpeed
     private float _crouchSpeed = 0.25f;
@@ -109,17 +112,16 @@ public class CharacterControlScript : MonoBehaviour
 
             case States.pushingBox:
                 _jump = false;
-                _cameraMultiplier = 0;
-                _camPivot.transform.localEulerAngles = Vector3.Scale(_camPivot.transform.localEulerAngles, new Vector3(0, 1, 1));
+                //_cameraMultiplier = 0;
 
-                if (_movement.z >= 0.5f)
-                {
-                    _movement = new Vector3(0, 0, Input.GetAxis("Vertical")) * _boxSpeed;
-                }
-                else
-                {
-                    _movement = Vector3.zero;
-                }
+                //if (_movement.z >= 0.5f)
+                //{
+                //    _movement = new Vector3(0, 0, Input.GetAxis("Vertical")) * _boxSpeed;
+                //}
+                //else
+                //{
+                //    _movement = Vector3.zero;
+                //}
 
                 break;
 
@@ -144,6 +146,10 @@ public class CharacterControlScript : MonoBehaviour
         LimitMaximumRunningSpeed();
         ApplyJump();
         Crouch();
+        if (_lerpForward)
+        {
+            LerpForward(_targetTransform);
+        }
 
         _characterController.Move(_velocity * Time.deltaTime);
 
@@ -300,6 +306,29 @@ public class CharacterControlScript : MonoBehaviour
         if (_collision.gameObject.tag == "DeadZoneTrigger")
         {
             State = States.dead;
+        }
+    }
+
+    public void ChangePlayerForward(Transform boxObject)
+    {
+        RaycastHit hit;
+        if(Physics.Linecast(this.gameObject.transform.position,boxObject.position,out hit))
+        {
+            _targetTransform = -hit.normal;
+            _lerpForward = true;
+        }
+    }
+
+    private void LerpForward(Vector3 target)
+    {
+        Debug.Log("help");
+        _lerpCounter += Time.deltaTime;
+        this.gameObject.transform.forward = Vector3.Lerp(this.gameObject.transform.forward, target, _lerpCounter);
+
+        if(_lerpCounter >1)
+        {
+            _lerpForward = false;
+            _lerpCounter = 0;
         }
     }
 }
