@@ -16,6 +16,8 @@ public class RockThrowScript : MonoBehaviour {
 
     private GameObject _rockBox;
 
+    public GameObject ThrowableRock;
+
     // Use this for initialization
     void Start ()
     {
@@ -51,6 +53,7 @@ public class RockThrowScript : MonoBehaviour {
             {
                 Debug.Log("Rock picked up");
                 _rockBox = _collision.gameObject.transform.parent.gameObject;
+                ThrowableRock = _collision.gameObject.transform.GetComponent<GameObject>();
                 this.gameObject.GetComponent<CharacterControlScript>().ChangePlayerForward(_rockBox.transform);
                 _isRockPickedUp = true;
                 this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.holdingRock;
