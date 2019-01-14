@@ -36,19 +36,27 @@ public class CardboardTriggerScript : MonoBehaviour
             if (Input.GetButtonDown("PushingBox") && this.gameObject.GetComponent<CharacterControlScript>().State == CharacterControlScript.States.normalMode)
             {
                 this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.pushingBox;
-                //_collision.gameObject.transform.parent.parent = this.gameObject.transform;
                 _isPushing = true;
                 _box = _collision.gameObject.transform.parent.gameObject;
                 this.gameObject.GetComponent<CharacterControlScript>().ChangePlayerForward(_box.transform);
                 _animator.SetBool("PushingBox", true);
             }
-            else if (Input.GetButtonDown("PushingBox") && this.gameObject.GetComponent<CharacterControlScript>().State == CharacterControlScript.States.pushingBox)
+            else if (Input.GetButtonDown("PushingBox") && this.gameObject.GetComponent<CharacterControlScript>().State == CharacterControlScript.States.pushingBox || !(_collision.gameObject.tag == "CardboardTrigger"))
             {
                 this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.normalMode;
-               // _collision.gameObject.transform.parent.parent = null;
                 _isPushing = false;
                 _animator.SetBool("PushingBox", false);
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider _collision)
+    {
+        if (_collision.gameObject.tag == "CardboardTrigger")
+        {
+            this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.normalMode;
+            _isPushing = false;
+            _animator.SetBool("PushingBox", false);
         }
     }
 

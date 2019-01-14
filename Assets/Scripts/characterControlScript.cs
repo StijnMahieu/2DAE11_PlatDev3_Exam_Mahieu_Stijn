@@ -121,6 +121,7 @@ public class CharacterControlScript : MonoBehaviour
 
             case States.pushingBox:
                 _jump = false;
+                _movement.x = 0;
                 break;
 
             case States.crouched:
