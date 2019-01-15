@@ -15,7 +15,7 @@ public class CharacterControlScript : MonoBehaviour
     [SerializeField]
     private GameObject _playerCamera;
 
-    //lives
+    //hitpoints
     public int _hitPoints = 3;
 
     //states
