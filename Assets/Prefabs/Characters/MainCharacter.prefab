@@ -2434,6 +2434,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _firstPersonCamera: {fileID: 1231198339479136}
   _playerCamera: {fileID: 1154642835877118}
+  _rockPrefab: {fileID: 1605100787129922, guid: dc7079763ea3a554597bd9fcfd0d56e9,
+    type: 2}
   ThrowableRock: {fileID: 0}
 --- !u!137 &137165988324727576
 SkinnedMeshRenderer:

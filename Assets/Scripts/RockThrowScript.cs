@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class RockThrowScript : MonoBehaviour {
 
+    //bool
     private bool _isRockPickedUp;
     private bool _isAiming;
 
+    //cameras
     [SerializeField]
     private GameObject _firstPersonCamera;
     [SerializeField]
     private GameObject _playerCamera;
 
+    //rockprefab
+    [SerializeField]
+    private GameObject _rockPrefab;
+
     private Animator _animator;
 
     private GameObject _rockBox;
-
     public GameObject ThrowableRock;
+
+    //spawn new rock here
+    private Vector3 _rockSpawnPosition;
 
     // Use this for initialization
     void Start ()
@@ -53,11 +61,16 @@ public class RockThrowScript : MonoBehaviour {
             {
                 Debug.Log("Rock picked up");
                 _rockBox = collision.gameObject.transform.gameObject;
-                ThrowableRock = collision.gameObject.transform.Find("ThrowingRock").gameObject;
+                ThrowableRock = collision.gameObject.transform.GetChild(2).gameObject;
+                _rockSpawnPosition = ThrowableRock.transform.position;
                 this.gameObject.GetComponent<CharacterControlScript>().ChangePlayerForward(_rockBox.transform);
                 _isRockPickedUp = true;
+
                 this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.holdingRock;
                 _animator.SetTrigger("HoldingRock");
+          
+                Instantiate<GameObject>(_rockPrefab, _rockSpawnPosition,Quaternion.identity).transform.SetParent(_rockBox.transform);
+                
             }
         }
     }
