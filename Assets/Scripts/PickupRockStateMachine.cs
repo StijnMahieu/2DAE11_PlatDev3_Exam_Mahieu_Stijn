@@ -46,7 +46,7 @@ public class PickupRockStateMachine : StateMachineBehaviour {
         PickUp = _rockThrowScript.ThrowableRock.transform;
         if (PickUp != null)
         {
-            Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            //Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= _animatorCutTime)
             {

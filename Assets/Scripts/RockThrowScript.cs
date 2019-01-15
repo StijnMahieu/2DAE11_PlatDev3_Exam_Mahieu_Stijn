@@ -59,7 +59,7 @@ public class RockThrowScript : MonoBehaviour {
         {
             if(Input.GetButtonDown("RockPickup") && !_isRockPickedUp && this.gameObject.GetComponent<CharacterControlScript>().State == CharacterControlScript.States.normalMode)
             {
-                Debug.Log("Rock picked up");
+                //Debug.Log("Rock picked up");
                 _rockBox = collision.gameObject.transform.gameObject;
                 ThrowableRock = collision.gameObject.transform.GetChild(2).gameObject;
                 _rockSpawnPosition = ThrowableRock.transform.position;
@@ -68,9 +68,6 @@ public class RockThrowScript : MonoBehaviour {
 
                 this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.holdingRock;
                 _animator.SetTrigger("HoldingRock");
-          
-                Instantiate<GameObject>(_rockPrefab, _rockSpawnPosition,Quaternion.identity).transform.SetParent(_rockBox.transform);
-                
             }
         }
     }
@@ -100,6 +97,9 @@ public class RockThrowScript : MonoBehaviour {
         _playerCamera.SetActive(true);
         _animator.ResetTrigger("Throw");
         _isAiming = false;
+
+        //instantiate new rock
+        Instantiate<GameObject>(_rockPrefab, _rockSpawnPosition, Quaternion.identity).transform.SetParent(_rockBox.transform);
     }
 
 }

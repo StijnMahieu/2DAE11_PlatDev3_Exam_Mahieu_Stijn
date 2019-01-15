@@ -130,7 +130,7 @@ public class CharacterControlScript : MonoBehaviour
                 break;
 
             case States.dead:
-                SceneManager.LoadScene(0);
+                ReloadScene();
                 break;
         }
     }
@@ -312,6 +312,11 @@ public class CharacterControlScript : MonoBehaviour
             State = States.dead;
             _animator.SetBool("Falling", false);
         }
+
+        if(_collision.gameObject.tag == "FinishTrigger")
+        {
+            Invoke("ReloadScene", 3.0f);
+        }
     }
 
     private void Falling()
@@ -342,5 +347,10 @@ public class CharacterControlScript : MonoBehaviour
             _lerpForward = false;
             _lerpCounter = 0;
         }
+    }
+
+    private void ReloadScene()
+    {
+        SceneManager.LoadScene(0);
     }
 }
