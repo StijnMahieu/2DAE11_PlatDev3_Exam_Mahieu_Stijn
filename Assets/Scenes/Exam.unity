@@ -5927,39 +5927,19 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1980715770158738, guid: fbbc619bdf05dae44a255931695a2f35, type: 2}
-      propertyPath: m_Name
-      value: RockBox (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_TagString
-      value: RockBoxTrigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 33142201701546966, guid: fbbc619bdf05dae44a255931695a2f35,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1628909543}
-    - target: {fileID: 1196182083273192, guid: fbbc619bdf05dae44a255931695a2f35, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 64151605770815030, guid: fbbc619bdf05dae44a255931695a2f35,
         type: 2}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1628909543}
-    - target: {fileID: 4708131541205846, guid: fbbc619bdf05dae44a255931695a2f35, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4667114110566376, guid: fbbc619bdf05dae44a255931695a2f35, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
+    - target: {fileID: 33142201701546966, guid: fbbc619bdf05dae44a255931695a2f35,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1628909543}
+    - target: {fileID: 1980715770158738, guid: fbbc619bdf05dae44a255931695a2f35, type: 2}
+      propertyPath: m_Name
+      value: RockBox (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbbc619bdf05dae44a255931695a2f35, type: 2}

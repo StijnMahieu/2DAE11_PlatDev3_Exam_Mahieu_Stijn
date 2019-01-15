@@ -82,6 +82,7 @@ public class RockThrowScript : MonoBehaviour {
                 _isRockPickedUp = false;
                 _animator.SetBool("Aiming", false);
                 this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.normalMode;
+                ThrowingPhysics();
             }
         }
     }
@@ -102,4 +103,10 @@ public class RockThrowScript : MonoBehaviour {
         Instantiate<GameObject>(_rockPrefab, _rockSpawnPosition, Quaternion.identity).transform.SetParent(_rockBox.transform);
     }
 
+    private void ThrowingPhysics()
+    {
+        ThrowableRock.transform.parent = null;
+        ThrowableRock.GetComponent<Rigidbody>().isKinematic = false;
+        ThrowableRock.GetComponent<Rigidbody>().AddForce(this.gameObject.transform.Find("PlayerPivot").forward * 12, ForceMode.Impulse);
+    }
 }
