@@ -15,6 +15,7 @@ public class PickupRockStateMachine : StateMachineBehaviour {
     private void Awake()
     {
         _characterControlScript = GameObject.Find("MainCharacter").GetComponent<CharacterControlScript>();
+        _rockThrowScript = GameObject.Find("MainCharacter").GetComponent<RockThrowScript>();
     }
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -42,13 +43,20 @@ public class PickupRockStateMachine : StateMachineBehaviour {
 
     public override void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        GameObject currentPickUp;
+        PickUp = _rockThrowScript.ThrowableRock.transform;
+        if (PickUp != null)
+        {
+            Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 
-        currentPickUp = _rockThrowScript.ThrowableRock;
-
-        SetPickupIK(animator);
-
-        animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
-        animator.SetIKPosition(AvatarIKGoal.RightHand, currentPickUp.transform.position);
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= _animatorCutTime)
+            {
+                SetPickupIK(animator);
+            }
+            else if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > _animatorCutTime && animator.GetCurrentAnimatorStateInfo(0).normalizedTime <=1)
+            {
+                PickUp.parent = animator.GetBoneTransform(HumanBodyBones.RightHand);
+                PickUp.position = animator.GetBoneTransform(HumanBodyBones.RightMiddleProximal).position;
+            }
+        }
     }
 }

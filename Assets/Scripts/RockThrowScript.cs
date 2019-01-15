@@ -45,15 +45,15 @@ public class RockThrowScript : MonoBehaviour {
         }
         ThrowRock();
     }
-    private void OnTriggerStay(Collider _collision)
+    private void OnTriggerStay(Collider collision)
     {
-        if (_collision.gameObject.tag == "RockBoxTrigger")
+        if (collision.gameObject.tag == "RockBoxTrigger")
         {
             if(Input.GetButtonDown("RockPickup") && !_isRockPickedUp && this.gameObject.GetComponent<CharacterControlScript>().State == CharacterControlScript.States.normalMode)
             {
                 Debug.Log("Rock picked up");
-                _rockBox = _collision.gameObject.transform.parent.gameObject;
-                ThrowableRock = _collision.gameObject.transform.GetComponent<GameObject>();
+                _rockBox = collision.gameObject.transform.gameObject;
+                ThrowableRock = collision.gameObject.transform.Find("ThrowingRock").gameObject;
                 this.gameObject.GetComponent<CharacterControlScript>().ChangePlayerForward(_rockBox.transform);
                 _isRockPickedUp = true;
                 this.gameObject.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.holdingRock;
