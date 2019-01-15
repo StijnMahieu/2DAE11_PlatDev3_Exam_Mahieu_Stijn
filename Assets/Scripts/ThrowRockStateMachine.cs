@@ -15,12 +15,9 @@ public class ThrowRockStateMachine : StateMachineBehaviour {
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _rockThrowScript.AimToNormal();
-        _characterControlScript.AllowMovement = true;
-        _characterControlScript.AllowCameraRotation = true;
     }
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _characterControlScript.AllowMovement = false;
-        _characterControlScript.AllowCameraRotation = false;
+
     }
 }

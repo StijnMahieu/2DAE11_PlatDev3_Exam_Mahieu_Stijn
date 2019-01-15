@@ -9,6 +9,7 @@ public class CharacterControlScript : MonoBehaviour
 {
     //animations
     private Animator _animator;
+
     //charactercontroller
     private CharacterController _characterController;
 
@@ -174,7 +175,6 @@ public class CharacterControlScript : MonoBehaviour
         {
             _isJumping = false;
         }
-
     }
 
     private void LimitMaximumRunningSpeed()
