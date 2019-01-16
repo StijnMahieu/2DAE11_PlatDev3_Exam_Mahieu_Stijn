@@ -8,6 +8,7 @@ TagManager:
   - FinishTrigger
   - DeadZoneTrigger
   - RockBoxTrigger
+  - EnemyHitBox
   layers:
   - Default
   - TransparentFX

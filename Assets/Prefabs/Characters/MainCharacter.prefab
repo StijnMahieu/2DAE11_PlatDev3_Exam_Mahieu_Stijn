@@ -2405,7 +2405,6 @@ MonoBehaviour:
   State: 0
   _camPivot: {fileID: 1366873689688528}
   _jumpHeight: 2
-  _mass: 75
   _acceleration: 30
   _dragOnGround: 10
   _maxRunningSpeed: 50

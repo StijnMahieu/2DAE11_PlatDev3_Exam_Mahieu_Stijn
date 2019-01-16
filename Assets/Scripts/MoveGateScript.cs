@@ -12,7 +12,7 @@ public class MoveGateScript : MonoBehaviour {
 	void Start ()
     {
         _gate = this.gameObject;
-        Debug.Log(_gate);
+        //Debug.Log(_gate);
         _enemyDead = true;
 	}
 	
