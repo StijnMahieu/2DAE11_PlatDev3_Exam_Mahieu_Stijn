@@ -47,8 +47,6 @@ public class CharacterControlScript : MonoBehaviour
 
     //LocomotionParameters
     [SerializeField]
-    private float _mass = 75;
-    [SerializeField]
     private float _acceleration;
     [SerializeField]
     private float _dragOnGround;
@@ -63,7 +61,6 @@ public class CharacterControlScript : MonoBehaviour
     private Transform _absoluteForward;
 
     //box
-    private float _boxSpeed = 0.5f;
     private Vector3 _targetTransform;
     private bool _lerpForward = false;
     private float _lerpCounter;

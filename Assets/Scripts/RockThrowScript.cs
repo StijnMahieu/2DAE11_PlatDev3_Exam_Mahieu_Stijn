@@ -30,6 +30,7 @@ public class RockThrowScript : MonoBehaviour {
     void Start ()
     {
         _animator = GetComponent<Animator>();
+
         _isRockPickedUp = false;
         _isAiming = false;
         _firstPersonCamera.SetActive(false);
@@ -51,7 +52,7 @@ public class RockThrowScript : MonoBehaviour {
             _animator.SetTrigger("NoThrow");
             AimToNormal();
         }
-        ThrowRock();
+        //ThrowRock();
     }
     private void OnTriggerStay(Collider collision)
     {
@@ -72,7 +73,7 @@ public class RockThrowScript : MonoBehaviour {
         }
     }
 
-    private void ThrowRock()
+    public void ThrowRock()
     {
         if(_isRockPickedUp && _isAiming)
         {
