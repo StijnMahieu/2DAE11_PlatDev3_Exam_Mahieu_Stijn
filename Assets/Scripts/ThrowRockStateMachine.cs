@@ -7,7 +7,7 @@ public class ThrowRockStateMachine : StateMachineBehaviour {
     private RockThrowScript _rockThrowScript;
     private CharacterControlScript _characterControlScript;
 
-    private float _animatorCutTime = 0.265f;
+    private float _animatorCutTime = 0.143f;
 
     private void Awake()
     {
@@ -26,9 +26,12 @@ public class ThrowRockStateMachine : StateMachineBehaviour {
     }
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= _animatorCutTime && animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
+        {
+            //Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        }
+        else
         {
 
         }

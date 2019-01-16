@@ -104,7 +104,7 @@ public class RockThrowScript : MonoBehaviour {
         Instantiate<GameObject>(_rockPrefab, _rockSpawnPosition, Quaternion.identity).transform.SetParent(_rockBox.transform);
     }
 
-    private void ThrowingPhysics()
+    public void ThrowingPhysics()
     {
         ThrowableRock.transform.parent = null;
         ThrowableRock.GetComponent<Rigidbody>().isKinematic = false;
