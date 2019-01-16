@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AIBehaviour : MonoBehaviour {
 
@@ -10,6 +11,10 @@ public class AIBehaviour : MonoBehaviour {
 
     private MoveGateScript _moveGateScript;
 
+    private NavMeshAgent _agent;
+    //wandering
+    private float _maxRoamDistance = 10;
+
     //checkdead
     public bool Dead = false;
 
@@ -18,6 +23,7 @@ public class AIBehaviour : MonoBehaviour {
     {
         _animator = GetComponent<Animator>();
         _moveGateScript = GameObject.Find("Gate").GetComponent<MoveGateScript>();
+        _agent = gameObject.GetComponent<NavMeshAgent>();
 
         _rootNode =
     new SelectorNode
@@ -49,7 +55,7 @@ public class AIBehaviour : MonoBehaviour {
     }
     bool SeesPlayer()
     {
-        return true;
+        return false;
     }
     IEnumerator <NodeResult> PlayDeathAnimation()
     {
@@ -64,6 +70,18 @@ public class AIBehaviour : MonoBehaviour {
     }
     IEnumerator<NodeResult> Roaming()
     {
+        if(_agent.remainingDistance <= _agent.stoppingDistance)
+        {
+            float newTarget = Random.Range(0, 100);
+            if(newTarget >=99)
+            {
+                Vector3 newPosition = transform.position + Random.insideUnitSphere*_maxRoamDistance;
+                NavMeshHit hit;
+                NavMesh.SamplePosition(newPosition, out hit, Random.Range(0,_maxRoamDistance), 1);
+
+                _agent.SetDestination(hit.position);
+            }
+        }
         yield return NodeResult.Succes;
     }
 
