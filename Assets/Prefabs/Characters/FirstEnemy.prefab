@@ -575,9 +575,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4174193451600736}
-  - component: {fileID: 143469868122651618}
   - component: {fileID: 95572239448353350}
   - component: {fileID: 136423906613219976}
+  - component: {fileID: 114331021248393808}
+  - component: {fileID: 195823448183167182}
   m_Layer: 9
   m_Name: EnemyAI
   m_TagString: EnemyHitBox
@@ -2117,7 +2118,7 @@ Animator:
   m_GameObject: {fileID: 1506698148020466}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3cd355f49d989cd43ae78367b751b39f, type: 3}
-  m_Controller: {fileID: 9100000, guid: cfcc6fe771809c64895c8c1fc02ac9a4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2f5459d68dbb501488044b6cb0850865, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2144,6 +2145,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114331021248393808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1506698148020466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94fc3ae2da137794c9cefc44ff613b49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136423906613219976
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2355,20 +2367,24 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0000009536743, y: -0.19487926, z: 0.001876384}
     m_Extent: {x: 0.94527346, y: 0.7953514, z: 0.1378017}
   m_DirtyAABB: 0
---- !u!143 &143469868122651618
-CharacterController:
+--- !u!195 &195823448183167182
+NavMeshAgent:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1506698148020466}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1.8
+  m_AgentTypeID: 0
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
