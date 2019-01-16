@@ -3,10 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AIBehaviour : MonoBehaviour {
+
     private INode _rootNode;
+
+    private Animator _animator;
+
+    private MoveGateScript _moveGateScript;
+
+    //checkdead
+    public bool Dead = false;
+
     // Use this for initialization
     void Start()
     {
+        _animator = GetComponent<Animator>();
+        _moveGateScript = GameObject.Find("Gate").GetComponent<MoveGateScript>();
+
         _rootNode =
     new SelectorNode
     (
@@ -14,11 +26,6 @@ public class AIBehaviour : MonoBehaviour {
             (
                 new ConditionNode(IsDead),
                 new ActionNode(PlayDeathAnimation)
-            ),
-            new SequenceNode
-            (
-                new ConditionNode(IsHit),
-                new ActionNode(PlayHitAnimation)
             ),
             new SequenceNode
             (
@@ -38,11 +45,7 @@ public class AIBehaviour : MonoBehaviour {
     }
     bool IsDead()
     {
-        return true;
-    }
-    bool IsHit()
-    {
-        return true;
+        return Dead;
     }
     bool SeesPlayer()
     {
@@ -50,10 +53,9 @@ public class AIBehaviour : MonoBehaviour {
     }
     IEnumerator <NodeResult> PlayDeathAnimation()
     {
-        yield return NodeResult.Succes;
-    }
-    IEnumerator<NodeResult> PlayHitAnimation()
-    {
+        Destroy(this.gameObject.GetComponent<CapsuleCollider>());
+        _animator.SetBool("EnemyDies", true);
+        _moveGateScript.EnemyDead = true;
         yield return NodeResult.Succes;
     }
     IEnumerator<NodeResult> ShootPlayer()
@@ -63,5 +65,13 @@ public class AIBehaviour : MonoBehaviour {
     IEnumerator<NodeResult> Roaming()
     {
         yield return NodeResult.Succes;
+    }
+
+    private void OnTriggerEnter(Collider _collision)
+    {
+        if (_collision.gameObject.tag == "EnemyHitBox")
+        {
+            Dead = true;
+        }
     }
 }

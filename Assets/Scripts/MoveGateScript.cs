@@ -6,21 +6,21 @@ public class MoveGateScript : MonoBehaviour {
 
     private GameObject _gate;
 
-    private bool _enemyDead;
+    public bool EnemyDead { get; set; }
 
 	// Use this for initialization
 	void Start ()
     {
         _gate = this.gameObject;
+        EnemyDead = false;
         //Debug.Log(_gate);
-        _enemyDead = true;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-		if(_enemyDead)
-        {
+		if(EnemyDead)
+        { 
             Destroy(_gate);
         }
 	}
