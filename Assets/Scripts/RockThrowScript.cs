@@ -52,7 +52,7 @@ public class RockThrowScript : MonoBehaviour {
             _animator.SetTrigger("NoThrow");
             AimToNormal();
         }
-        //ThrowRock();
+        ThrowRock();
     }
     private void OnTriggerStay(Collider collision)
     {

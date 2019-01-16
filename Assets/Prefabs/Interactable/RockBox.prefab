@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33357384673370564}
   - component: {fileID: 23787020329187404}
   - component: {fileID: 64749686096876476}
-  - component: {fileID: 122160735155886474}
   - component: {fileID: 54691301613907018}
   m_Layer: 0
   m_Name: ThrowingRock
@@ -107,7 +106,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1980715770158738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11, y: 1, z: 9.617}
+  m_LocalPosition: {x: -1.5, y: 1, z: 6.5}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4708131541205846}
@@ -702,14 +701,3 @@ MonoBehaviour:
   m_selectedFaces: 
   m_SelectedEdges: []
   m_selectedTriangles: 
---- !u!122 &122160735155886474
-Halo:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1087444676823794}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4282104112
-  m_Size: 0.1
