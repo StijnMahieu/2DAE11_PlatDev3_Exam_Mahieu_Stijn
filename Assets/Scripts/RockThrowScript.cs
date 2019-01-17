@@ -99,6 +99,7 @@ public class RockThrowScript : MonoBehaviour {
         _playerCamera.SetActive(true);
         _animator.ResetTrigger("Throw");
         _isAiming = false;
+        ThrowableRock.GetComponent<MeshCollider>().isTrigger = false;
 
         //instantiate new rock
         Instantiate<GameObject>(_rockPrefab, _rockSpawnPosition, Quaternion.identity).transform.SetParent(_rockBox.transform);

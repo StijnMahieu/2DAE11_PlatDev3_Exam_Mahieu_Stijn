@@ -18,6 +18,10 @@ public class AIBehaviour : MonoBehaviour {
     //checkdead
     public bool Dead = false;
 
+    //movementanimations
+    private float _agentHorizontal = Animator.StringToHash("AgentHorizontal");
+    private float _agentVertical = Animator.StringToHash("AgentVertical");
+
     // Use this for initialization
     void Start()
     {
@@ -70,7 +74,12 @@ public class AIBehaviour : MonoBehaviour {
     }
     IEnumerator<NodeResult> Roaming()
     {
-        if(_agent.remainingDistance <= _agent.stoppingDistance)
+        _agentVertical = _agent.velocity.z;
+        _agentHorizontal = _agent.velocity.x;
+
+        AIAnimations();
+
+        if (_agent.remainingDistance <= _agent.stoppingDistance)
         {
             float newTarget = Random.Range(0, 100);
             if(newTarget >=99)
@@ -91,5 +100,11 @@ public class AIBehaviour : MonoBehaviour {
         {
             Dead = true;
         }
+    }
+
+    private void AIAnimations()
+    {
+        _animator.SetFloat("AgentVertical", _agent.velocity.z);
+        _animator.SetFloat("AgentHorizontal", _agent.velocity.x);
     }
 }
