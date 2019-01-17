@@ -21,6 +21,10 @@ public class AIBehaviour : MonoBehaviour {
     //Ai shooting player
     public bool AiSeesPlayer;
     public GameObject Player;
+    private float _hitChancePercentage = 2;
+
+    //player hitpoints
+    private int _hitPoints = 5;
 
     // Use this for initialization
     void Start()
@@ -72,6 +76,7 @@ public class AIBehaviour : MonoBehaviour {
     }
     IEnumerator<NodeResult> ShootPlayer()
     {
+        DoesAIHitPlayer();
         yield return NodeResult.Succes;
     }
     IEnumerator<NodeResult> Roaming()
@@ -116,6 +121,24 @@ public class AIBehaviour : MonoBehaviour {
         else
         {
             return true;
+        }
+    }
+    
+    private void DoesAIHitPlayer()
+    {
+        if(DoesAiSeePlayer() && _hitPoints > 0)
+        {
+            float playerHitChance = Random.Range(0, 1000);
+            if(_hitChancePercentage >= playerHitChance)
+            {
+                Debug.Log("hit");
+                _hitPoints = _hitPoints - 1;
+                Debug.Log(_hitPoints);
+            }
+        }
+        else if(_hitPoints == 0)
+        {
+             Player.GetComponent<CharacterControlScript>().State = CharacterControlScript.States.dead;
         }
     }
 }
