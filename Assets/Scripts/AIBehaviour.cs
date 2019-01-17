@@ -74,23 +74,20 @@ public class AIBehaviour : MonoBehaviour {
     }
     IEnumerator<NodeResult> Roaming()
     {
-        _agentVertical = _agent.velocity.z;
-        _agentHorizontal = _agent.velocity.x;
-
         AIAnimations();
 
         if (_agent.remainingDistance <= _agent.stoppingDistance)
-        {
-            float newTarget = Random.Range(0, 100);
-            if(newTarget >=99)
             {
-                Vector3 newPosition = transform.position + Random.insideUnitSphere*_maxRoamDistance;
-                NavMeshHit hit;
-                NavMesh.SamplePosition(newPosition, out hit, Random.Range(0,_maxRoamDistance), 1);
+                float newTarget = Random.Range(0, 100);
+                if (newTarget >= 99)
+                {
+                    Vector3 newPosition = transform.position + Random.insideUnitSphere * _maxRoamDistance;
+                    NavMeshHit hit;
+                    NavMesh.SamplePosition(newPosition, out hit, Random.Range(0, _maxRoamDistance), 1);
 
-                _agent.SetDestination(hit.position);
+                    _agent.SetDestination(hit.position);
+                }
             }
-        }
         yield return NodeResult.Succes;
     }
 
