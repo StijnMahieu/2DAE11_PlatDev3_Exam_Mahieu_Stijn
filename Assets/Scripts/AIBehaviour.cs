@@ -18,9 +18,9 @@ public class AIBehaviour : MonoBehaviour {
     //checkdead
     public bool Dead = false;
 
-    //movementanimations
-    private float _agentHorizontal = Animator.StringToHash("AgentHorizontal");
-    private float _agentVertical = Animator.StringToHash("AgentVertical");
+    //Ai shooting player
+    public bool AiSeesPlayer;
+    public GameObject Player;
 
     // Use this for initialization
     void Start()
@@ -28,6 +28,7 @@ public class AIBehaviour : MonoBehaviour {
         _animator = GetComponent<Animator>();
         _moveGateScript = GameObject.Find("Gate").GetComponent<MoveGateScript>();
         _agent = gameObject.GetComponent<NavMeshAgent>();
+        Player = GameObject.Find("MainCharacter");
 
         _rootNode =
     new SelectorNode
@@ -59,7 +60,8 @@ public class AIBehaviour : MonoBehaviour {
     }
     bool SeesPlayer()
     {
-        return false;
+        AiSeesPlayer = DoesAiSeePlayer();
+        return AiSeesPlayer;
     }
     IEnumerator <NodeResult> PlayDeathAnimation()
     {
@@ -101,7 +103,19 @@ public class AIBehaviour : MonoBehaviour {
 
     private void AIAnimations()
     {
-        _animator.SetFloat("AgentVertical", _agent.velocity.z);
-        _animator.SetFloat("AgentHorizontal", _agent.velocity.x);
+        _animator.SetFloat("AgentVertical", _agent.velocity.x);
+        _animator.SetFloat("AgentHorizontal", _agent.velocity.z);
+    }
+
+    private bool DoesAiSeePlayer()
+    {
+        if(Physics.Linecast(this.gameObject.transform.position,Player.transform.position))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
